@@ -3,7 +3,8 @@ import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { client } from "../../tina/__generated__/client";
 
 const postsResponse = await client.queries.postConnection();
-const posts = postsResponse.data.postConnection.edges.map((post) => post.node);
+const posts =
+  postsResponse.data.postConnection.edges?.map((post) => post?.node) ?? [];
 ---
 
 <html lang="en">
@@ -18,12 +19,17 @@ const posts = postsResponse.data.postConnection.edges.map((post) => post.node);
   <body>
     <h1>Astro</h1>
     {
-      posts.map((post) => (
-        <article>
-          <h2>{post.title}</h2>
-          <TinaMarkdown content={post.body} client:load />
-        </article>
-      ))
+      posts.map((post) => {
+        if (!post) {
+          return null;
+        }
+        return (
+          <article>
+            <h2>{post.title}</h2>
+            <TinaMarkdown content={post.body} client:load />
+          </article>
+        );
+      })
     }
   </body>
 </html>
