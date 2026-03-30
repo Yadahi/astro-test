@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "npx tinacms dev -c \"astro dev\"",
-    "build": "astro build",
+    "build": "npx tinacms build -c \"astro build\"",
     "preview": "astro preview",
     "astro": "astro"
   },
