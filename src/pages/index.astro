@@ -1,6 +1,6 @@
 ---
-import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { client } from "../../tina/__generated__/client";
+import TinaRenderer from "../components/TinaRenderer.tsx";
 
 const postsResponse = await client.queries.postConnection();
 const posts =
@@ -27,7 +27,11 @@ const posts =
           return (
             <article>
               <h2>{post.title}</h2>
-              <TinaMarkdown content={post.body} client:load />
+              <TinaRenderer
+                content={post.body}
+                client:load
+                imgMaxHeight="300px"
+              />
             </article>
           );
         })
@@ -37,7 +41,9 @@ const posts =
 </html>
 
 <style>
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
