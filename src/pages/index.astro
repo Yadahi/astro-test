@@ -17,19 +17,60 @@ const posts =
     <title>Astro</title>
   </head>
   <body>
-    <h1>Astro</h1>
-    {
-      posts.map((post) => {
-        if (!post) {
-          return null;
-        }
-        return (
-          <article>
-            <h2>{post.title}</h2>
-            <TinaMarkdown content={post.body} client:load />
-          </article>
-        );
-      })
-    }
+    <main>
+      <h1>Astro</h1>
+      {
+        posts.map((post) => {
+          if (!post) {
+            return null;
+          }
+          return (
+            <article>
+              <h2>{post.title}</h2>
+              <TinaMarkdown content={post.body} client:load />
+            </article>
+          );
+        })
+      }
+    </main>
   </body>
 </html>
+
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: system-ui, sans-serif;
+    line-height: 1.6;
+    color: #1a1a1a;
+    background: #f9f9f9;
+  }
+
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  article {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+</style>
