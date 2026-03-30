@@ -1,0 +1,58 @@
+---
+import { client } from "../../tina/__generated__/client";
+import TinaRenderer from "../components/TinaRenderer.tsx";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const postsResponse = await client.queries.postConnection();
+const posts =
+  postsResponse.data.postConnection.edges?.map((post) => post?.node) ?? [];
+---
+
+<BaseLayout title="Posts">
+  <main>
+    <h1>Posts</h1>
+    {
+      posts.map((post) => {
+        if (!post) {
+          return null;
+        }
+        return (
+          <article>
+            <h2>{post.title}</h2>
+            <TinaRenderer
+              content={post.body}
+              client:load
+              imgMaxHeight="300px"
+            />
+          </article>
+        );
+      })
+    }
+  </main>
+</BaseLayout>
+
+<style>
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  article {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+</style>
