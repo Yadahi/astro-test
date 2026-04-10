@@ -47,6 +47,34 @@ export default defineConfig({
             required: true,
           },
           {
+            type: "string",
+            name: "summary",
+            label: "Summary",
+            description: "A short 1-2 sentence summary of the article",
+          },
+          {
+            type: "string",
+            name: "author",
+            label: "Author",
+          },
+          {
+            type: "string",
+            name: "status",
+            label: "Status",
+            options: ["draft", "review", "published"], // dropdown in the admin panel
+          },
+          {
+            type: "string",
+            name: "tags",
+            label: "Tags",
+            list: true, // allows multiple values
+          },
+          {
+            type: "datetime",
+            name: "date",
+            label: "Date",
+          },
+          {
             type: "rich-text",
             name: "body",
             label: "Body",
